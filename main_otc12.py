@@ -9,7 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, accuracy_score
 from matplotlib import pyplot as plt
 import numpy as np
-from cellnn import cellnn, mcellnn
+from cellnn import cellnn, mcellnn, cellula
 import torch as t
 from tools import imshow, clahe_equalized, dataset_normalized, adjust_gamma, SBS
 import joblib
@@ -29,7 +29,8 @@ class Type(Enum):
 
 # %%
 net = cellnn()
-mnet = mcellnn()  # mcellnn
+#mnet = mcellnn()  # mcellnn
+mnet = cellula(4)
 cuda_gpu = t.cuda.is_available()
 gpus = [0]
 if (cuda_gpu):
