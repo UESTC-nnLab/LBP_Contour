@@ -151,18 +151,4 @@ if __name__ == '__main__':
             epoch_loss.append(loss.item())
         print(np.mean(np.array(epoch_loss)))
         scheduler.step(np.mean(np.array(epoch_loss)))
-        if epoch % 1 == 0:
-            print("Epoch number {}\n Current loss {}\n".format(
-                epoch, np.mean(np.array(epoch_loss))))
-            iteration_number += 10  # 每10个iteration进行一次loss记录
-            counter.append(iteration_number)
-            loss_history.append(np.mean(np.array(epoch_loss)))
-            acc = mytest()
-            writer.add_scalar("./scalar/test", loss.item(), epoch)
-            if acc > highest:
-                highest = acc
-                state = {'net': net.state_dict(
-                ), 'optimizer': optimizer.state_dict(), 'epoch': epoch}
-                t.save(state, "model_new_temp.ph")
-                print("highest:"+str(highest))
     t.save(state, "model_ori_{}.ph".format(loss.item()))
